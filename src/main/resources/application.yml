@@ -1,0 +1,69 @@
+## SERVER
+server:
+  port: 8080
+  compression:
+    enabled: true
+  error:
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: cars
+    version: v1.0.0
+    restPort: ${server.port}
+    root: /api/${spring.application.name}/v1
+
+    services:
+      rest:
+        # FindAll
+        findAll:
+          name: FIND ALL
+          path: /
+
+        # FindById
+        findById:
+          name: FIND BY ID
+          path: /{id}
+
+        # Create
+        create:
+          name: CREATE
+          path: /
+
+        # Update
+        update:
+          name: UPDATE
+          path: /{id}
+
+        # Delete
+        delete:
+          name: DELETE
+          path: /{id}
+
+  # Thymeleaf Configuration
+  thymeleaf:
+    encoding: UTF-8
+    prefix: classpath:/static/
+    enable: true
+
+  datasource:
+    initialization-mode: never
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/temperies_test?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false&serverTimezone=GMT-5
+    username: temperies_test
+    password: temperies2021
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+
+## LOGGER
+logging:
+  level:
+    root: info
+    org.springframework: info
